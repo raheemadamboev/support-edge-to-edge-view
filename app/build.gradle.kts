@@ -44,7 +44,4 @@ dependencies {
 
     // constraint layout
     implementation(libs.constraintlayout)
-
-    // activity
-    implementation(libs.activity)
 }
