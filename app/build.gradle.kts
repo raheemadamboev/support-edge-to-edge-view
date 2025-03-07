@@ -1,45 +1,50 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.android)
+    alias(libs.plugins.kotlin)
 }
 
 android {
     namespace = "xyz.teamgravity.supportedgetoedgeview"
-    compileSdk = 35
+    compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
         applicationId = "xyz.teamgravity.supportedgetoedgeview"
-        minSdk = 26
-        targetSdk = 35
+        minSdk = libs.versions.sdk.min.get().toInt()
+        targetSdk = libs.versions.sdk.target.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = libs.versions.java.target.get()
+    }
+
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+    // core
+    implementation(libs.core)
+
+    // appcompat
+    implementation(libs.appcompat)
+
+    // material
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
+    // constraint layout
+    implementation(libs.constraintlayout)
+
+    // activity
+    implementation(libs.activity)
 }
